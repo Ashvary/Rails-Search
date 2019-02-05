@@ -1,0 +1,16 @@
+<% if @stud.empty? %>
+	<h1>No result found</h1>
+	<% end %>
+	<% else %>
+	
+	<% @stud.each do |f| %>
+	<ul>
+	<%= image_tag f.image.url , :size => "150x100" %>
+	<li><%= f.name %></li>
+	<li><%= f.email %></li>
+	<li><%= f.phone %></li>
+	<li><%= f.gender %></li>
+	<li><%= f.link %></li>
+	</ul>
+
+	<% end %>

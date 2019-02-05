@@ -1,0 +1,101 @@
+<center><h1>Student Data</h1>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="">
+	Add Student
+	</button>
+	<p></p>
+<div class="container">
+	<%= form_tag search_path , method: 'get' do %>
+	<%= text_field_tag :search , params[:search] %>
+	<%= submit_tag 'Search' , name: nil %>
+	<% end %>
+</div>
+    <% flash.each do |key, value| %>
+        <div style= "font-size: 20px; color: red;"><%= value %></div>
+      <% end %>
+</center>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Student Detail</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for @student , :url => "/main/create" , :html => {:id => 'form-valid'}  do |f| %>
+            <div class="container">
+            <div class="form-group row">
+	  			<div class="col-sm-2">
+		        	<%= f.label :image %>
+		        </div>
+	            <div class="col-sm-10">
+		            <%= f.file_field :image %>
+		        </div>
+            </div>	
+			<div class="form-group row">
+    			<div class="col-sm-2">
+  	        		<%= f.label :name %>
+  	        	</div>
+	            <div class="col-sm-10">
+	            	<%= f.text_field :name %>
+	            </div>
+	        </div>
+            <div class="form-group row">
+	  			<div class="col-sm-2">
+		        	<%= f.label :phone %>
+		        </div>
+		        <div class="col-sm-10">
+		            <%= f.text_field :phone %>
+		        </div>
+		    </div>
+	        <div class="form-group row">
+			    <div class="col-sm-2">
+			  		<%= f.label :email %>
+	            </div>
+	            <div class="col-sm-10">
+	            	<%= f.text_field :email %>
+	        	</div>
+            </div>
+			<div class="form-group row">
+    			<div class="col-sm-2">
+  	        		<%= f.label :gender %>
+  	        	</div>
+	            <div class="col-sm-10">
+					<%= f.radio_button :gender, "male" %> <span class="option">Male<span>
+				   <%= f.radio_button :gender, "female" %><span class="option">Female<span></br>
+				</div>
+	        </div>
+	        <div>
+	        	<div class="form-group row">
+	        		<div class="col-sm-2">
+	        			<%= f.label :course_id %>
+	        		</div>
+	        		<div class="col-sm-10">
+					<%= collection_select(:record, :course_id, Course.all, :id, :name) %>
+					</div>
+	        	</div>
+	        </div>
+            <div class="form-group row">
+  				<div class="col-sm-2">
+  					<%= f.label :link %>
+  				</div>
+		        <div class="col-sm-10">    
+	            	<%= f.text_field :link %>
+	        	</div>
+	        </div>
+          	<%= f.submit 'Submit', class: 'btn btn-success btn-lg' %>
+          </div>
+          <%end%>
+  </div>
+  </div>
+</div>
+<br>
+<center>
+	<div class="container">
+		<iframe src="http://localhost:3000/main/show" style="height:450px;width:800px"> </iframe>
+	</div>
+
+<h2><%= link_to 'Download pdf' , main_show_path(format: "pdf") %></h2>
+</center>
+<script type="text/javascript" src="/assets/record.js"></script>
